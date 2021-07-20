@@ -6,22 +6,14 @@
         <App>
             <pages>
                 <Page title="{i18n>appTitle}">
-                    <content>
-                        <Panel headerText="{i18n>helloPanel}" 
-                        class="sapUiResponsiveMargin" 
-                        width="auto">
-                            <content>
-                                <Button text="{i18n>showHelloButtonText}" 
-                                press=".onShowHello" 
+                    <headerContent>
+                        <Button id="helloDialogHeader"
+                                icon="sap-icon://action"
+                                press=".onOpenDialogHeader"
                                 class="sapUiSmallMarginEnd"/>
-                                <Input  value="{/recipient/name}"
-                                valueLiveUpdate="true"
-                                width="60%"/>
-                                <Text text="Hello {/recipient/name}"
-                                class="sapUiSmallMargin 
-                                boldElements"/>
-                            </content>
-                        </Panel>
+                    </headerContent>
+                    <content>
+                        <mvc:XMLView viewName = "fiori_ini.SAPUI5.view.HelloPanel"/>
                     </content>
                 </Page>
             </pages>
