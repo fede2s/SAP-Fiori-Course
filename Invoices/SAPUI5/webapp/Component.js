@@ -30,6 +30,9 @@ sap.ui.define([
 
                 this._helloDialog = new HelloDialog(this.getRootControl());
 
+                //Create the views based in url/hash
+                this.getRouter().initialize();
+
             },
 
             exit : function () {
