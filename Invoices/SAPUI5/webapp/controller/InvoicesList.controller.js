@@ -38,6 +38,11 @@ function (Controller,JSONModel, InvoicesFormatter, Filter, FilterOperator) {
             const oList = this.getView().byId("invoiceList");
             const oBinding = oList.getBinding("items");
             oBinding.filter(aFilter);
+        },
+
+        navigateToDetails: function (oEvent){
+            const oRouter= sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("Details");
         }
     });
 });
