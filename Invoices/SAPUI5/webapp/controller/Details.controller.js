@@ -8,14 +8,10 @@ sap.ui.define([
     function (Controller) {
         "use strict";
 
-        return Controller.extend("fiori_ini.SAPUI5.controller.App", {
+        return Controller.extend("fiori_ini.SAPUI5.controller.Details", {
 
             onInit: function (){
 
-            },
-
-            onOpenDialogHeader : function () {
-                this.getOwnerComponent().openHelloDialog();
             }
 
         });
