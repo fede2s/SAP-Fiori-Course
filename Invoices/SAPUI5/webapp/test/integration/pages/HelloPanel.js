@@ -28,7 +28,7 @@ function (Opa5, Press){
 
             assertions : {
                 iSeeTheHelloDialog: function(){
-                    return this.wairFor({
+                    return this.waitFor({
                         controlType: "sap.m.Dialog",
                         success: function (){
                             Opa5.assert.ok(true, "The dialog was opened")

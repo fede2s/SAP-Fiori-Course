@@ -26,7 +26,7 @@ function (mockserver, opaQunit){
         });
 
         //Actions
-        When.onTheAppPagge.iSayHelloDialogButton();
+        When.onTheAppPage.iSayHelloDialogButton();
 
         //Assertions
         Then.onTheAppPage.iSeeTheHelloDialog();
