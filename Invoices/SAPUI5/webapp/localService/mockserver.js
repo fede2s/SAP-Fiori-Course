@@ -66,6 +66,8 @@ function (MockServer, JSONModel, UriParameters, Log) {
                             bGenerateMissingMockData: true
                         });
 
+                        var aRequests = oMockServer.getRequests();
+
                         //compose an error response for each request
                         var fnResponse = function (iErrCode, sMessage, aRequest){
                             aRequest.response = function (oXhr) {
@@ -76,7 +78,7 @@ function (MockServer, JSONModel, UriParameters, Log) {
 
                         // simulate metadata errors
                         if (oOptions.metadataError || oUriParameters.get("metadataError")) {
-                            aRequest.forEach(function(aEntry) {
+                            aRequests.forEach(function(aEntry) {
                                 if (aEntry.path.toString().indexof("$metadata") > -1 ){
                                     fnResponse(500, "metadata Error", aEntry);
                                 }
@@ -94,7 +96,7 @@ function (MockServer, JSONModel, UriParameters, Log) {
                         };
 
                         // set requests and start the server
-                        oMockServer.setRequest(aRequest);
+                        oMockServer.setRequests(aRequests);
                         oMockServer.start();
 
                         Log.info("Running the app with mock data");
