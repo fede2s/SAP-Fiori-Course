@@ -62,12 +62,12 @@ sap.ui.define([
 
                 this.setAggregation("_label", new Label({
                     text: "{i18n>productRatingLabelInitial}"
-                }));
+                }).addStyleClass("sapUiSmallMargin"));
 
                 this.setAggregation ("_button", new Button({
                     text: "{i18n>productRatingButton}",
                     press: this._onSubmit.bind(this)
-                }));
+                }).addStyleClass("sapUiTinyMarginTopBottom"));
             },
 
             _onRate: function () {
@@ -107,6 +107,7 @@ sap.ui.define([
 
             renderer: function (oRm, oControl) {
                 oRm.openStart("div", oControl);
+                oRm.class("productRating");
                 oRm.openEnd();
                 oRm.renderControl(oControl.getAggregation("_rating"));
                 oRm.renderControl(oControl.getAggregation("_label"));
