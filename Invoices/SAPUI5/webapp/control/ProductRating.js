@@ -1,12 +1,18 @@
 /* eslint-disable no-undef */
 //@ts-nocheck
 sap.ui.define([
-    'sap/ui/core/Control'
+    'sap/ui/core/Control',
+    'sap/m/RatingIndicator',
+    'sap/m/Label',
+    'sap/m/Button'
 ],
 /**
  * @param {typeof sap.ui.core.Control} Control
+ * @param {typeof sap.m.RatingIndicator} RatingIndicator
+ * @param {typeof sap.m.Label} Label
+ * @param {typeof sap.m.Button} Button
  */
-    function (Control) {
+    function (Control, RatingIndicator, Label, Button) {
 
         'use strict';
 
@@ -38,7 +44,7 @@ sap.ui.define([
                     events: {
                         change : {
                             parameters : {
-                                value: { type : "int" }                                
+                                value: { type : "int" }
                             }
                         }
                     }
@@ -47,7 +53,57 @@ sap.ui.define([
 
             init : function () {
 
+                this.setAggregation("_rating", new RatingIndicator({
+                    value : this.getValue(),
+                    iconSize: "2rem",
+                    visualMode: "Half",
+                    liveChange: this._onRate.bind(this)
+                }));
+
+                this.setAggregation("_label", new Label({
+                    text: "{i18n>productRatingLabelInitial}"
+                }));
+
+                this.setAggregation ("_button", new Button({
+                    text: "{i18n>productRatingButton}",
+                    press: this._onSubmit.bind(this)
+                }));
             },
+
+            _onRate: function () {
+                const oResourceBundle = this.getModel("i18n").getResourceBundle();
+                const fValue = oEvent.getParameter("value");
+
+                this.setProperty("value", fValue, true);
+                this.getAggregation("_label").setText(oResourceBundle.getText("productRatingIndicator", [Value, oEvent.getSource().getMaxValue()]));
+                this.getAggregation("_button").setDesign("Bold");
+
+            },
+
+            _onSubmit: function () {
+                const oResourceBundle = this.getModel("i18n").getResourceBundle();
+
+                this.getAggregation("_rating").setEnabled(false);
+                this.getAggregation("_label").setText(oResourceBundle.getText("productRatingLabelFinal"));
+                this.getAggregation("_button").setEnabled(false);
+                this.fireEvent("change",{
+                    value: this.getValue()
+                });
+            },
+
+            reset: function () {
+                const oResourceBundle = this.getModel("i18n").getResourceBundle();
+                this.setValue(0);
+                this.getAggregation("_rating").setEnabled(true);
+                this.getAggregation("_label").setText(oResourceBundle.getText("productRatingLabelInitial"));
+                this.getAggregation("_button").setEnabled(true);
+            },
+
+            setValue: function () {
+                this.setProperty("value", fValue, true);
+                this.getAggregation("_rating").setValue(fValue);
+            },
+
 
             renderer: function (oRm, oControl) {
 
