@@ -39,16 +39,16 @@ sap.ui.define([
                         type: "sap.m.Button",
                         multiple: false,
                         visibility: "hidden"
-                    },
-
-                    events: {
-                        change : {
-                            parameters : {
+                    }
+                },
+                
+                events: {
+                        change: {
+                            parameters: {
                                 value: { type : "int" }
                             }
                         }
                     }
-                }
             },
 
             init : function () {
@@ -70,17 +70,17 @@ sap.ui.define([
                 }).addStyleClass("sapUiTinyMarginTopBottom"));
             },
 
-            _onRate: function () {
+            _onRate: function (oEvent) {
                 const oResourceBundle = this.getModel("i18n").getResourceBundle();
                 const fValue = oEvent.getParameter("value");
 
                 this.setProperty("value", fValue, true);
-                this.getAggregation("_label").setText(oResourceBundle.getText("productRatingIndicator", [Value, oEvent.getSource().getMaxValue()]));
-                this.getAggregation("_button").setDesign("Bold");
+                this.getAggregation("_label").setText(oResourceBundle.getText("productRatingIndicator", [fValue, oEvent.getSource().getMaxValue()]));
+                this.getAggregation("_label").setDesign("Bold");
 
             },
 
-            _onSubmit: function () {
+            _onSubmit: function (oEvent) {
                 const oResourceBundle = this.getModel("i18n").getResourceBundle();
 
                 this.getAggregation("_rating").setEnabled(false);
@@ -96,10 +96,11 @@ sap.ui.define([
                 this.setValue(0);
                 this.getAggregation("_rating").setEnabled(true);
                 this.getAggregation("_label").setText(oResourceBundle.getText("productRatingLabelInitial"));
+                this.getAggregation("_label").setDesign("Standard");
                 this.getAggregation("_button").setEnabled(true);
             },
 
-            setValue: function () {
+            setValue: function (fValue) {
                 this.setProperty("value", fValue, true);
                 this.getAggregation("_rating").setValue(fValue);
             },
