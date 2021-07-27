@@ -41,8 +41,11 @@ function (Controller,JSONModel, InvoicesFormatter, Filter, FilterOperator) {
         },
 
         navigateToDetails: function (oEvent){
+            const oItem = oEvent.getSource();
             const oRouter= sap.ui.core.UIComponent.getRouterFor(this);
-            oRouter.navTo("Details");
+            oRouter.navTo("Details", {
+                invoicePath: window.encodeURIComponent(oItem.getBindingContext("northwind").getPath().substr(1))
+            });
         }
     });
 });
