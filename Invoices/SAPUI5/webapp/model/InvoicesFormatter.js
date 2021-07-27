@@ -17,7 +17,7 @@ sap.ui.define([], function () {
                     return resourceBundle.getText("invoiceStatusC");
             
                 default:
-                    return sStatus;
+                    return resourceBundle.getText("invoiceStatusA");//sStatus;
             }
         }
     }
