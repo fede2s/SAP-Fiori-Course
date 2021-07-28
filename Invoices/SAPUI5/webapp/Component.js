@@ -28,6 +28,9 @@ sap.ui.define([
                 var i18nModel = new ResourceModel({ bundleName: "fiori_ini.SAPUI5.i18n.i18n" });
                 this.setModel(i18nModel, "i18n");
 
+                //Set the device model
+                this.setModel(Models.createDeviceModel(), "device");
+
                 this._helloDialog = new HelloDialog(this.getRootControl());
 
                 //Create the views based in url/hash

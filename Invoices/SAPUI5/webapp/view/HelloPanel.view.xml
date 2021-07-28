@@ -6,7 +6,9 @@
 
     <Panel headerText="{i18n>helloPanel}" 
             class="sapUiResponsiveMargin" 
-            width="auto">
+            width="auto"
+            expandable="{device>/system/phone}"
+            expanded="{= !${device>/system/phone} }">
         <content>
             <Button id="helloDialogButton"
                     icon="sap-icon://action"
